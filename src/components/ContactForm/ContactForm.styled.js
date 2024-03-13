@@ -6,6 +6,7 @@ width: 450px;
 border-radius: 10px;
 padding: 50px;
 background-color: #ebebeb;
+margin-bottom: 30px;
 `
 
 export const Forma = styled.form`
