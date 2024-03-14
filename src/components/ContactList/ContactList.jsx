@@ -7,11 +7,9 @@ import { getFilteredContacts } from 'store/selectors';
 import { useSelector } from 'react-redux';
 
 export const ContactList = () => {
-
-  
-  const contacts = useSelector(getFilteredContacts)
+  const contacts = useSelector(getFilteredContacts);
   const dispatch = useDispatch();
-  
+
   const deleteContacts = id => {
     dispatch(delContacts(id));
     Notify.success('Contact successfully deleted.');
@@ -19,17 +17,19 @@ export const ContactList = () => {
 
   return (
     <List>
-      {contacts.map(item => (
-        <ContactItem
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          number={item.number}
-          deleteContacts={deleteContacts}
-        />
-      ))}
+      {contacts.length ? (
+        contacts.map(item => (
+          <ContactItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            number={item.number}
+            deleteContacts={deleteContacts}
+          />
+        ))
+      ) : (
+        <h2>not contacts</h2>
+      )}
     </List>
   );
 };
-
-
