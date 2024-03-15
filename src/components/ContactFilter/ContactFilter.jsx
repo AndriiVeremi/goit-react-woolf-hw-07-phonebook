@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RiSearchLine } from 'react-icons/ri';
 import { Input, Label } from './ContactFilter.styled';
 import { onFilter } from 'store/filterSlice';
-import { getFilter } from 'store/selectors';
+import { selectFilter } from 'store/selectors';
 
 export const ContactFilter = () => {
 
-  const { filter } = useSelector(getFilter);
+  const { filter } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const findContacts = e => {
