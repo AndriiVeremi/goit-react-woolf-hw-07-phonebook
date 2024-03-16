@@ -2,12 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { ContactItem } from 'components/ContactItem/ContactItem';
-import { selectFilteredContacts } from 'store/selectors';
+import {
+  selectFilteredContacts,
+  selectIsLoading,
+  selectError,
+} from 'store/selectors';
 import { fetchContacts, deleteContact } from 'store/thunksOperations';
 import { List } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,12 +32,20 @@ export const ContactList = () => {
       () => {
         return;
       },
-      { 
-        titleColor: '#3373e2', 
-        okButtonBackground: '#3373e2' 
+      {
+        titleColor: '#3373e2',
+        okButtonBackground: '#3373e2',
       }
     );
   };
+
+  if (isLoading && !error) {
+    return <b>Request in progress...</b>;
+  }
+
+  if (error) {
+    return <b>Error</b>;
+  }
 
   return (
     <List>
