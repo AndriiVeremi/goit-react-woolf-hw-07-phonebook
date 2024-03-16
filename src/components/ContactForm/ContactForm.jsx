@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-// import { createContacts } from 'store/contactsSlice';
 
-import { addContactsThunk } from 'store/thunksOperations';
+
+import { fetchContacts } from 'store/thunksOperations';
 import { RiUserAddLine } from 'react-icons/ri';
 import { Wrapper, Forma, Label, Input, Button } from './ContactForm.styled';
 import { selectContacts } from 'store/selectors';
@@ -45,7 +44,7 @@ export const ContactForm = () => {
         'Ok'
       );
     } else {
-      dispatch(addContactsThunk({id:nanoid(), name, number }));
+      dispatch(fetchContacts({ name, number }));
       Notify.success(`You added a new contact: ${name}`);
       reset();
     }

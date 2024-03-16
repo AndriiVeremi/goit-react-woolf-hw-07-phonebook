@@ -1,42 +1,42 @@
-import { getAllContacts, addNewContacts, deleteContacts } from 'api/contactsApi';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  pendingAction,
-  fulfilledAction,
-  rejectedAction,
-} from './contactsSlice';
+  getAllContacts,
+  addNewContacts,
+  delContacts,
+} from 'api/contactsApi';
 
-export const getAllContactsThunk = () => {
-  return async dispatch => {
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchAll',
+  async (_, { thunkAPI }) => {
     try {
-      dispatch(pendingAction());
-      const data = await getAllContacts();
-      dispatch(fulfilledAction(data));
+      const { data } = await getAllContacts();
+      return data;
     } catch (error) {
-      dispatch(rejectedAction(error));
+      return thunkAPI.rejectWithValue(error.message);
     }
-  };
-};
+  }
+);
 
-export const addContactsThunk = contact => {
-  return async dispatch => {
+export const addContact = createAsyncThunk(
+  'contacts/addContacts',
+  async (contact, { rejectWithValue }) => {
     try {
-      dispatch(pendingAction());
-      const data = await addNewContacts(contact);
-      dispatch(fulfilledAction(data));
+      const { data } = await addNewContacts(contact);
+      return data;
     } catch (error) {
-      dispatch(rejectedAction(error));
+      return rejectWithValue(error.message);
     }
-  };
-};
+  }
+);
 
-export const deleteContactsThunk = id => {
-  return async dispatch => {
+export const deleteContact = createAsyncThunk(
+  'contacts/deleteContacts',
+   async (id, { rejectWithValue }) => {
     try {
-      dispatch(pendingAction());
-      const data = await deleteContacts(id);
-      dispatch(fulfilledAction(data));
+      const { data } = await delContacts(id);
+      return data;
     } catch (error) {
-      dispatch(rejectedAction(error));
+       return rejectWithValue(error.message);
     }
-  };
-};
+  }
+)

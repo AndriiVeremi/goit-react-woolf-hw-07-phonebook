@@ -4,21 +4,21 @@ import { useDispatch } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { selectFilteredContacts } from 'store/selectors';
 import { useSelector } from 'react-redux';
-import { getAllContactsThunk, deleteContactsThunk } from 'store/thunksOperations';
+import { fetchContacts, deleteContact } from 'store/thunksOperations';
 import { useEffect } from 'react';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
 
-  console.log('contacts',contacts)
+  console.log('contacts', contacts);
 
-useEffect(() => {
-  dispatch(getAllContactsThunk())
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-  const deleteContacts = id => {
-    dispatch(deleteContactsThunk(id));
+  const deletContacts = id => {
+    dispatch(deleteContact(id));
     Notify.success('Contact successfully deleted.');
   };
 
@@ -31,7 +31,7 @@ useEffect(() => {
             id={item.id}
             name={item.name}
             number={item.phone}
-            deleteContacts={deleteContacts}
+            deleteContacts={deletContacts}
           />
         ))
       ) : (
