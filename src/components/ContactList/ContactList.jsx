@@ -44,7 +44,7 @@ export const ContactList = () => {
   }
 
   if (error) {
-    return <b>Error</b>;
+    return <b>{error}</b>;
   }
 
   return (
