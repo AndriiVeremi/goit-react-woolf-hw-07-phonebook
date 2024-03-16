@@ -26,6 +26,9 @@ height: 35px;
 font-size: 20px;
 color: #3373e2;
 border: none;
+&:focus-visible {
+    outline-color: #3373e2;
+}
 `
 export const Button = styled.button`
 display: flex;

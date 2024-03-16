@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { selectFilteredContacts } from 'store/selectors';
 import { fetchContacts, deleteContact } from 'store/thunksOperations';
 import { List } from './ContactList.styled';
 
 export const ContactList = () => {
-  
   const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
 
@@ -16,8 +15,22 @@ export const ContactList = () => {
   }, [dispatch]);
 
   const removeContacts = id => {
-    dispatch(deleteContact(id));
-    Notify.success('Contact successfully deleted.');
+    Confirm.show(
+      'Delete contact',
+      'You want to delete this contact?',
+      'Yes',
+      'No',
+      () => {
+        dispatch(deleteContact(id));
+      },
+      () => {
+        return;
+      },
+      { 
+        titleColor: '#3373e2', 
+        okButtonBackground: '#3373e2' 
+      }
+    );
   };
 
   return (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { selectContacts } from 'store/selectors';
 import { addContact } from 'store/thunksOperations';
@@ -43,7 +42,6 @@ export const ContactForm = () => {
       );
     } else {
       dispatch(addContact({ name, phone }));
-      Notify.success(`You added a new contact: ${name}`);
       reset();
     }
   };

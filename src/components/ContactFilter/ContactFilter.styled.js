@@ -20,5 +20,8 @@ border: 1px solid #333;
 &:hover {
     border-color: #3373e2;
 }
+&:focus-visible {
+    outline-color: #3373e2;
+}
 
 `
