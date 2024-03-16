@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-
+import { selectContacts } from 'store/selectors';
 import { addContact } from 'store/thunksOperations';
 import { RiUserAddLine } from 'react-icons/ri';
 import { Wrapper, Forma, Label, Input, Button } from './ContactForm.styled';
-import { selectContacts } from 'store/selectors';
 
 export const ContactForm = () => {
 

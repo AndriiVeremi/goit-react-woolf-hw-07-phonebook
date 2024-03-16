@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RiSearchLine } from 'react-icons/ri';
-import { Input, Label } from './ContactFilter.styled';
 import { onFilter } from 'store/filterSlice';
 import { selectFilter } from 'store/selectors';
+import { RiSearchLine } from 'react-icons/ri';
+import { Input, Label } from './ContactFilter.styled';
 
 export const ContactFilter = () => {
 

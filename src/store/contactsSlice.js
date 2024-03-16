@@ -16,6 +16,8 @@ const thunks = [fetchContacts, addContact, deleteContact];
 
 const createStatus = status => isAnyOf(...thunks.map(el => el[status]));
 
+//-------------------
+
 const pendingAction = state => {
   state.isLoading = true;
   state.error = null;
@@ -42,7 +44,10 @@ const handleFulfilledAdd = (state, { payload }) => {
 };
 
 const handleFulfilledDelete = (state, { payload }) => {
-  state.items = state.items.filter(({ id }) => id !== payload);
+  const index = state.items.findIndex(
+    contact => contact.id === payload.id
+  );
+  state.items.splice(index, 1);
 };
 
 //-----------------------

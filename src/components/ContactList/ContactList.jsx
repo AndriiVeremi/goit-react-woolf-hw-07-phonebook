@@ -1,13 +1,13 @@
-import { ContactItem } from 'components/ContactItem/ContactItem';
-import { List } from './ContactList.styled';
-import { useDispatch } from 'react-redux';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { selectFilteredContacts } from 'store/selectors';
-import { useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from 'store/thunksOperations';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { ContactItem } from 'components/ContactItem/ContactItem';
+import { selectFilteredContacts } from 'store/selectors';
+import { fetchContacts, deleteContact } from 'store/thunksOperations';
+import { List } from './ContactList.styled';
 
 export const ContactList = () => {
+  
   const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export const ContactList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const deletContacts = id => {
+  const removeContacts = id => {
     dispatch(deleteContact(id));
     Notify.success('Contact successfully deleted.');
   };
@@ -29,7 +29,7 @@ export const ContactList = () => {
             id={item.id}
             name={item.name}
             number={item.phone}
-            deleteContacts={deletContacts}
+            deleteContacts={removeContacts}
           />
         ))
       ) : (
